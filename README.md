@@ -1,2 +1,2 @@
 # mood-tracker-MDS
-Proiect distractiv la MDS
+Proiect distractiv la MDS.
