@@ -1,7 +1,8 @@
 # mood-tracker-MDS
-Proiect distractiv la MDS.
 
-#Barem
+## Trello
+[https://trello.com/b/mKlQGvr0/mood-tracker](https://trello.com/b/mKlQGvr0/mood-tracker)
+
 ## Barem de notare proiect laborator MDS 2021
 Nota la laborator este media aritmetică a notelor pentru cele două componente A și B (descrise mai jos): ```round((A+B)/2)```, pentru proiectul implementat în echipă. 
 
