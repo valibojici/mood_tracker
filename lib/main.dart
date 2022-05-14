@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_tracker/pages/breathing/BreathingExercise.dart';
 import 'package:mood_tracker/pages/calendar/Calendar.dart';
 import 'package:mood_tracker/pages/home/Home.dart';
 import 'package:mood_tracker/pages/objectives/Objectives.dart';
@@ -23,6 +24,7 @@ class MoodTracker extends StatelessWidget {
         '/statistics': (context) => const Statistics(),
         '/objectives': (context) => const Objectives(),
         '/quotes': (context) => const Quotes(),
+        '/breathing': (context) => const BreathingExercise(),
         '/settings': (context) => const Settings(),
       },
       title: "Mood Tracker",
