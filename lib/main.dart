@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_tracker/model/Record.dart';
 import 'package:mood_tracker/pages/breathing/BreathingExercise.dart';
 import 'package:mood_tracker/pages/calendar/Calendar.dart';
 import 'package:mood_tracker/pages/home/Home.dart';
@@ -6,8 +7,12 @@ import 'package:mood_tracker/pages/objectives/Objectives.dart';
 import 'package:mood_tracker/pages/quotes/Quotes.dart';
 import 'package:mood_tracker/pages/settings/Settings.dart';
 import 'package:mood_tracker/pages/statistics/Statistics.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(RecordAdapter());
+  await Hive.openBox('journal');
   runApp(const MoodTracker());
 }
 
