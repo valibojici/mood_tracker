@@ -17,40 +17,33 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const Text textHome = Text(
-      "Aici am pune poate un mesaj cu 'hello how was your day' sau ceva de genul asta, eventual si un buton jos unde cand il apesi si te duce la ecranul cu jurnalul de azi",
+      "Hello, how was your day?",
       style: TextStyle(
-        fontSize: 15,
+        fontSize: 20,
       ),
-    );
-
-    IconButton journalButton = IconButton(
-      onPressed: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => Journal(dataCurenta: DateTime.now())));
-      },
-      icon: Icon(
-        FontAwesomeIcons.penToSquare,
-      ),
-      iconSize: 30,
     );
 
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          textHome,
-          SizedBox(
-            height: 20,
-          ),
-          CircleAvatar(
-            radius: 35,
-            backgroundColor: Colors.green,
-            child: journalButton,
-          ),
-        ],
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            textHome,
+            SizedBox(height: 20),
+          ],
+        ),
       ),
       bottomNavigationBar: const BottomHomeMenu(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => Journal(currentDate: DateTime.now())));
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(FontAwesomeIcons.penToSquare),
+      ),
     );
   }
 }
