@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_tracker/pages/calendar/CalendarDays.dart';
 
 /*
   Aici ma gandeam sa fie un calendar, unde fiecare zi e colorata in functie de moodul selectat
@@ -21,10 +22,7 @@ class _CalendarState extends State<Calendar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Calendar")),
-      body: const Center(
-        child: Text(
-            "Aici ma gandeam sa fie un calendar si cand dai tap pe o zi te duce la jurnalul pe ziua aia"),
-      ),
+      body: CalendarDays(),
     );
   }
 }
