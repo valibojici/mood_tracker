@@ -28,4 +28,10 @@ class Record {
       required this.mood,
       required this.emotions,
       required this.notes});
+
+  Record.fromRecord({required Record record})
+      : data = record.data,
+        mood = record.mood,
+        emotions = [...record.emotions],
+        notes = record.notes;
 }
