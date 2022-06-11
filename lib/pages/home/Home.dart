@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:mood_tracker/pages/calendar/Journal.dart';
 import 'package:mood_tracker/pages/home/BottomHomeMenu.dart';
 import 'package:mood_tracker/pages/personalityTest/personalityTest.dart';
@@ -35,10 +36,10 @@ class Home extends StatelessWidget {
             SizedBox(height: 20),
 
             TextButton(
-              child: Text('Take our personality test!'),
+              child: const Text('Take our personality test!'),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PersonalityTest()));
+                  builder: (context) => const PersonalityTest()));                             
         },
             )
           ],

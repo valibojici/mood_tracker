@@ -4,6 +4,8 @@ import './quiz.dart';
 import './result.dart';
 
 class PersonalityTest extends StatefulWidget {
+  const PersonalityTest({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _PersonalityTestState();
@@ -11,9 +13,6 @@ class PersonalityTest extends StatefulWidget {
 }
 
 class _PersonalityTestState extends State<PersonalityTest> {
-  var _questionIndex = 0;
-  var _totalScore = 0;
-
   final _questions = const [
     {
       'questionText': 'Have you been feeling down, depressed, irritable or hopeless over the last two weeks?',
@@ -41,36 +40,46 @@ class _PersonalityTestState extends State<PersonalityTest> {
         {'text': 'More than half of the days', 'score': 3},
         {'text': 'Nearly every day', 'score': 1}
       ]
-    }
+    },
   ];
+  var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _resetQuiz(){
+  void _resetQuiz() {
     setState(() {
       _questionIndex = 0;
       _totalScore = 0;
     });
-    
   }
+
   void _answerQuestion(int score) {
-    setState(() {
-      _questionIndex += 1;
-    });
 
     _totalScore += score;
+
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
+    print(_questionIndex);
+    if (_questionIndex < _questions.length) {
+      print('We have more questions!');
+    } else {
+      print('No more questions!');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Personality test', style: TextStyle(fontSize: 15)),
+          title: const Text('Mood testing'),
         ),
         body: _questionIndex < _questions.length
             ? Quiz(
-                questions: _questions,
                 answerQuestion: _answerQuestion,
                 questionIndex: _questionIndex,
+                questions: _questions,
               )
             : Result(_totalScore, _resetQuiz),
       ),

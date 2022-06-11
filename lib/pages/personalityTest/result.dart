@@ -2,43 +2,41 @@ import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
   final int resultScore;
-  final Function resetQuiz;
+  final Function() resetHandler;
 
-  Result(this.resultScore, this.resetQuiz);
+  const Result(this.resultScore, this.resetHandler, {Key? key}) : super(key: key);
 
-  String get resultText {
-    String text;
-    if (resultScore < 4) {
-      text = 'You are healthy and happy!';
-    } else if (resultScore < 15) {
-      text = 'You might need some help!';
+  String get resultPhrase {
+    String resultText;
+    if (resultScore >= 20) {
+      resultText = 'You are quite happy!';
+    } else if (resultScore >= 10) {
+      resultText = 'You might be a little sad...';
+    } else if (resultScore >= 5) {
+      resultText = 'Your sadness is too much to handle!';
     } else {
-      text = 'You are in a critical state!';
+      resultText = 'You are as sad as you can be :(';
     }
-    return text;
+    return resultText;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blueGrey,
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Text(
-              resultText,
-              style: TextStyle(
-                color: Colors.yellow,
-                fontSize: 32,
-              ),
-              textAlign: TextAlign.center,
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Text(
+            resultPhrase,
+            style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          TextButton(
+            child: const Text(
+              'Restart Quiz!',
             ),
-            TextButton(
-              child: Text('Restart Quiz'),
-              onPressed: resetQuiz(),
-            )
-          ],
-        ),
+            onPressed: resetHandler,
+          ),
+        ],
       ),
     );
   }
