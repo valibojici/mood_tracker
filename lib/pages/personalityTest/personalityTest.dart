@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import './quiz.dart';
 import './result.dart';
-
+  
 class PersonalityTest extends StatefulWidget {
   const PersonalityTest({Key? key}) : super(key: key);
 
@@ -73,6 +73,15 @@ class _PersonalityTestState extends State<PersonalityTest> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leadingWidth: 100,
+          leading: ElevatedButton.icon(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.arrow_left_sharp),
+          label: const Text('Back'),
+          style: ElevatedButton.styleFrom(
+              elevation: 0, primary: Colors.transparent),
+        ),
           title: const Text('Mood testing'),
         ),
         body: _questionIndex < _questions.length
