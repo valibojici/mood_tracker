@@ -13,7 +13,9 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
 
-  bool isSwitched =  false;
+  bool isSwitched =  MoodTracker.themeNotifier.value == ThemeMode.light
+      ? false
+      : true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
