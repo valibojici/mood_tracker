@@ -154,8 +154,9 @@ class _BreathingExerciseState extends State<BreathingExercise> {
                                 ),
                             ],
                         ),
-                      )
-
+      
+                      ),
+                  Image.asset('assets/images/meditation.jpg'),
                  ],
                )
           
