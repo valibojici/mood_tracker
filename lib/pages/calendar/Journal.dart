@@ -18,7 +18,17 @@ class Journal extends StatefulWidget {
   final DateTime currentDate;
 
   // TO DO schimbat sa citeasca din baza de date emotiile
-  static final List<String> emotions = ['anger', 'happy', 'sad', 'depressed'];
+  static final List<String> emotions = [
+    'anger',
+    'happiness',
+    'sadness',
+    'depressed',
+    'boredom',
+    'anxiety',
+    'joy',
+    'guilt',
+    'disgust'
+  ];
   static final List<Color> moodColors = [
     Colors.deepPurple,
     Colors.purple,
@@ -36,17 +46,21 @@ class _JournalState extends State<Journal> {
   bool _hasChanged = false;
   late Record _record;
   late String _currentDate;
-  final Box records = Hive.box("journal");
+  Box? records;
   final TextEditingController _notesController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-
+    try {
+      records = Hive.box("journal");
+    } catch (e) {
+      records = null;
+    }
     _currentDate = DateFormat('dd-MM-yyyy').format(widget.currentDate);
 
-    if (records.containsKey(_currentDate)) {
-      _record = Record.fromRecord(record: records.get(_currentDate));
+    if (records != null && records!.containsKey(_currentDate)) {
+      _record = Record.fromRecord(record: records!.get(_currentDate));
     } else {
       _record =
           Record(data: widget.currentDate, mood: -1, emotions: [], notes: '');
@@ -187,8 +201,10 @@ class _JournalState extends State<Journal> {
           .showSnackBar(const SnackBar(content: Text("Please choose a mood")));
       return;
     }
+    try {
+      records!.put(_currentDate, _record);
+    } catch (e) {}
 
-    records.put(_currentDate, _record);
     Navigator.pop(context);
   }
 
@@ -216,7 +232,9 @@ class _JournalState extends State<Journal> {
     );
 
     if (action) {
-      records.delete(_currentDate);
+      try {
+        records!.delete(_currentDate);
+      } catch (e) {}
       Navigator.of(context).pop();
     }
   }
