@@ -17,22 +17,30 @@ void main() async {
 }
 
 class MoodTracker extends StatelessWidget {
+  static final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
   const MoodTracker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/home',
-      routes: {
-        '/home': (context) => const Home(),
-        '/calendar': (context) => const Calendar(),
-        '/statistics': (context) => const Statistics(),
-        '/objectives': (context) => const Objectives(),
-        '/quotes': (context) => const Quotes(),
-        '/breathing': (context) => const BreathingExercise(),
-        '/settings': (context) => const Settings(),
-      },
-      title: "Mood Tracker",
-    );
+    return ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeNotifier,
+        builder: (_, ThemeMode currentMode, __){
+          return MaterialApp(
+            initialRoute: '/home',
+            routes: {
+              '/home': (context) => const Home(),
+              '/calendar': (context) => const Calendar(),
+              '/statistics': (context) => const Statistics(),
+              '/objectives': (context) => const Objectives(),
+              '/quotes': (context) => const Quotes(),
+              '/breathing': (context) => const BreathingExercise(),
+              '/settings': (context) => const Settings(),
+            },
+            themeMode: currentMode,
+            theme: ThemeData(),
+            darkTheme: ThemeData.dark(),
+            title: "Mood Tracker",
+          );
+        });
   }
 }
