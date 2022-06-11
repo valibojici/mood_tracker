@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mood_tracker/main.dart';
 
 import './quiz.dart';
 import './result.dart';
-  
+
 class PersonalityTest extends StatefulWidget {
   const PersonalityTest({Key? key}) : super(key: key);
 
@@ -13,6 +14,7 @@ class PersonalityTest extends StatefulWidget {
 }
 
 class _PersonalityTestState extends State<PersonalityTest> {
+  static final ValueNotifier<ThemeMode> themeNotifier = MoodTracker.themeNotifier;
   final _questions = const [
     {
       'questionText': 'Have you been feeling down, depressed, irritable or hopeless over the last two weeks?',
@@ -45,6 +47,7 @@ class _PersonalityTestState extends State<PersonalityTest> {
   var _questionIndex = 0;
   var _totalScore = 0;
 
+
   void _resetQuiz() {
     setState(() {
       _questionIndex = 0;
@@ -69,29 +72,36 @@ class _PersonalityTestState extends State<PersonalityTest> {
 
   @override
   Widget build(BuildContext context) {
-
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leadingWidth: 100,
-          leading: ElevatedButton.icon(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(Icons.arrow_left_sharp),
-          label: const Text('Back'),
-          style: ElevatedButton.styleFrom(
-              elevation: 0, primary: Colors.transparent),
-        ),
-          title: const Text('Mood testing'),
-        ),
-        body: _questionIndex < _questions.length
-            ? Quiz(
+    return ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeNotifier,
+        builder: (_, ThemeMode currentMode, __)
+        {
+          return MaterialApp(
+            home: Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                leadingWidth: 100,
+                leading: ElevatedButton.icon(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(Icons.arrow_left_sharp),
+                  label: const Text('Back'),
+                  style: ElevatedButton.styleFrom(
+                      elevation: 0, primary: Colors.transparent),
+                ),
+                title: const Text('Mood testing'),
+              ),
+              body: _questionIndex < _questions.length
+                  ? Quiz(
                 answerQuestion: _answerQuestion,
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : Result(_totalScore, _resetQuiz),
-      ),
-    );
+                  : Result(_totalScore, _resetQuiz),
+            ),
+            themeMode: currentMode,
+            theme: ThemeData(),
+            darkTheme: ThemeData.dark(),
+          );
+        });
   }
 }
