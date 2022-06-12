@@ -32,7 +32,7 @@ void main() async {
   Hive.registerAdapter(RecordAdapter());
   await Hive.openBox('journal');
   final cron = Cron();
-  cron.schedule(Schedule.parse('* 18 * * *'), () async {
+  cron.schedule(Schedule.parse('0 18 * * *'), () async {
     print('Runs every Five seconds');
     notify();
   });
