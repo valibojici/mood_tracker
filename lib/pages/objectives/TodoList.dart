@@ -3,8 +3,10 @@ import 'package:mood_tracker/pages/objectives/Todo.dart';
 import 'package:mood_tracker/pages/objectives/TodoItem.dart';
 
 class TodoList extends StatefulWidget {
+  const TodoList({Key? key}) : super(key: key);
+
   @override
-  _TodoListState createState() => new _TodoListState();
+  _TodoListState createState() => _TodoListState();
 }
 
 class _TodoListState extends State<TodoList> {
@@ -29,10 +31,10 @@ class _TodoListState extends State<TodoList> {
 	  barrierDismissible: false, // needs user to tap the button
 	  builder: (BuildContext context) {
 	    return AlertDialog(
-	      title: const Text('Add a new todo item'),
+	      title: const Text('Add a new to-do item'),
 	      content: TextField(
 	        controller: _textFieldController,
-	        decoration: const InputDecoration(hintText: 'Type your new todo'),
+	        decoration: const InputDecoration(hintText: 'Type your new to-do'),
 	      ),
 	      actions: <Widget>[
 	        TextButton(
