@@ -15,7 +15,13 @@ class _TodoListState extends State<TodoList> {
 	setState(() {
 	  todo.checked = !todo.checked;
 	});
-}
+  }
+  void _addTodoItem(String name) {
+	setState(() {
+	  _todos.add(Todo(name: name, checked: false));
+	});
+	_textFieldController.clear();
+  }
 
   Future<void> _displayDialog() async {
 	return showDialog<void>(
@@ -47,7 +53,7 @@ class _TodoListState extends State<TodoList> {
 Widget build(BuildContext context) {
 	return Scaffold(
 	  appBar: AppBar(
-	    title: Text('Todo list'),
+	    title: Text('Objectives list'),
 	  ),
 	  body: ListView(
 	    padding: const EdgeInsets.symmetric(vertical: 8.0),
