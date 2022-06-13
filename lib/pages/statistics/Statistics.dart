@@ -18,14 +18,6 @@ class Statistics extends StatefulWidget {
 }
 
 class _StatisticsState extends State<Statistics> {
-  Map <String, double> moodMap =
-  {
-    "Very sad" : 0,
-    "Sad": 0,
-    "Neutral": 0,
-    "Happy" : 0,
-    "Very happy": 0
-  };
   static final List<Color> moodColors = [
     Colors.deepPurple,
     Colors.purple,
@@ -33,16 +25,23 @@ class _StatisticsState extends State<Statistics> {
     Colors.teal,
     Colors.green
   ];
+  int k = 7;
+  static const int inf = 100000000;
   @override
   Widget build(BuildContext context) {
+    Map <String, double> moodMap =
+    {
+      "Very sad" : 0,
+      "Sad": 0,
+      "Neutral": 0,
+      "Happy" : 0,
+      "Very happy": 0
+    };
     Box records = Hive.box("journal");
     List<Record> L = records.values.cast<Record>().toList();
-    int k = 7;
     int mn = max(L.length - k - 1, 0);
-    for(int i = L.length - 1; i >= mn; i--)
-      {
-        switch(L[i].mood)
-        {
+    for (int i = L.length - 1; i >= mn; i--) {
+      switch (L[i].mood) {
           case 0:
             moodMap["Very sad"] = (moodMap["Very sad"]! + 1);
             break;
@@ -60,15 +59,33 @@ class _StatisticsState extends State<Statistics> {
             break;
         }
       }
+    var dropdownItems = [
+      const DropdownMenuItem(child: Text("7 days"), value : 7),
+      const DropdownMenuItem(child: Text("30 days"), value : 30),
+      const DropdownMenuItem(child: Text("all days"), value : inf),
+    ];
+    void dropdownCallback(int? selected)
+    {
+      if(selected is int)
+      {
+        setState((){
+          k = selected;
+        });
+      }
+    }
     return Scaffold(
-      appBar: AppBar(title: const Text("Statistics")),
-      body: Center(
-        child: PieChart(
-          dataMap: moodMap,
-          colorList: moodColors,
-          centerText: "Moods",
-          chartValuesOptions: const ChartValuesOptions(showChartValues: true, showChartValuesInPercentage: true),
-      ),
-    ));
+        appBar: AppBar(title: const Text("Statistics")),
+        body: Center(
+            child: Column(
+                children: <Widget>[
+                  DropdownButton(items: dropdownItems, onChanged: dropdownCallback, value:k),
+                    PieChart(
+                      dataMap: moodMap,
+                      colorList: moodColors,
+                      centerText: "Moods",
+                      chartValuesOptions: const ChartValuesOptions(showChartValues: true, showChartValuesInPercentage: true),
+                    )])
+          ));
+    }
   }
-}
+
