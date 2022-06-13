@@ -66,6 +66,8 @@ class _StatisticsState extends State<Statistics> {
         child: PieChart(
           dataMap: moodMap,
           colorList: moodColors,
+          centerText: "Moods",
+          chartValuesOptions: const ChartValuesOptions(showChartValues: true, showChartValuesInPercentage: true),
       ),
     ));
   }
