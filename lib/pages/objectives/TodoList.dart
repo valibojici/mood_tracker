@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/pages/objectives/Todo.dart';
+import 'package:mood_tracker/pages/objectives/TodoItem.dart';
 
 class TodoList extends StatefulWidget {
   @override
@@ -9,6 +10,12 @@ class TodoList extends StatefulWidget {
 class _TodoListState extends State<TodoList> {
   final TextEditingController _textFieldController = TextEditingController();
   final List<Todo> _todos = <Todo>[];
+
+  void _handleTodoChange(Todo todo) {
+	setState(() {
+	  todo.checked = !todo.checked;
+	});
+}
 
   Future<void> _displayDialog() async {
 	return showDialog<void>(

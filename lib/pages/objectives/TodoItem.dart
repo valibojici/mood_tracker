@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_tracker/pages/objectives/Todo.dart';
 
 class TodoItem extends StatelessWidget {
+
   TodoItem({
     required this.todo,
     required this.onTodoChanged,
