@@ -10,6 +10,7 @@ import 'package:mood_tracker/pages/statistics/Statistics.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cron/cron.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,14 +40,37 @@ void main() async {
   runApp(const MoodTracker());
 }
 
-class MoodTracker extends StatelessWidget {
-  static final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+
+class MoodTracker extends StatefulWidget {
+  static ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+  static String themeNotifierType = "light";
   const MoodTracker({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<MoodTracker> createState() => _MoodTrackerState();
+}
+
+class _MoodTrackerState extends State<MoodTracker> {
+  void getThemeValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    setState(() {
+      MoodTracker.themeNotifierType = prefs.getString('theme')!;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context){
+    getThemeValue();
+    if(MoodTracker.themeNotifierType == "light"){
+      MoodTracker.themeNotifier = ValueNotifier(ThemeMode.light);
+    }
+    else
+    {
+      MoodTracker.themeNotifier = ValueNotifier(ThemeMode.dark);
+    }
     return ValueListenableBuilder<ThemeMode>(
-        valueListenable: themeNotifier,
+        valueListenable: MoodTracker.themeNotifier,
         builder: (_, ThemeMode currentMode, __){
           return MaterialApp(
             initialRoute: '/home',

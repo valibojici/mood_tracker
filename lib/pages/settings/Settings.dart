@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 /*
   Setari notificari? inca nu m am uitat cum se fac astea, nici eu nu stiu
 */
@@ -9,6 +10,11 @@ class Settings extends StatefulWidget {
 
   @override
   State<Settings> createState() => _SettingsState();
+}
+
+addStringToSF(String s) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('theme', s);
 }
 
 class _SettingsState extends State<Settings> {
@@ -32,6 +38,14 @@ class _SettingsState extends State<Settings> {
                           MoodTracker.themeNotifier.value == ThemeMode.light
                               ? ThemeMode.dark
                               : ThemeMode.light;
+                          if (MoodTracker.themeNotifier.value == ThemeMode.light)
+                            {
+                                addStringToSF("light");
+                            }
+                          else
+                            {
+                              addStringToSF("dark");
+                            }
                           isSwitched = value;
                         });
                       }),
