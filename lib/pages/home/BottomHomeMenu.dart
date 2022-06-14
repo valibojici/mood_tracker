@@ -24,10 +24,6 @@ class BottomHomeMenu extends StatelessWidget {
               icon: Icon(CupertinoIcons.chart_pie_fill)),
           IconButton(
               color: Colors.white,
-              onPressed: () => Navigator.pushNamed(context, '/quotes'),
-              icon: Icon(CupertinoIcons.quote_bubble)),
-          IconButton(
-              color: Colors.white,
               onPressed: () => Navigator.pushNamed(context, '/objectives'),
               icon: Icon(FontAwesomeIcons.listCheck)),
           IconButton(

@@ -5,7 +5,6 @@ import 'package:mood_tracker/pages/calendar/Calendar.dart';
 import 'package:mood_tracker/pages/home/Home.dart';
 import 'package:mood_tracker/pages/objectives/Todo.dart';
 import 'package:mood_tracker/pages/objectives/TodoList.dart';
-import 'package:mood_tracker/pages/quotes/Quotes.dart';
 import 'package:mood_tracker/pages/settings/Settings.dart';
 import 'package:mood_tracker/pages/statistics/Statistics.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -76,7 +75,6 @@ class _MoodTrackerState extends State<MoodTracker> {
               '/calendar': (context) => const Calendar(),
               '/statistics': (context) => const Statistics(),
               '/objectives': (context) => const TodoList(),
-              '/quotes': (context) => const Quotes(),
               '/breathing': (context) => const BreathingExercise(),
               '/settings': (context) => const Settings(),
             },
