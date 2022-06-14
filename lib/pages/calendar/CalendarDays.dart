@@ -20,7 +20,7 @@ class _CalendarDaysState extends State<CalendarDays> {
   Widget build(BuildContext context) {
     return TableCalendar(
       firstDay: DateTime.utc(1970, 1, 1),
-      lastDay: DateTime.utc(2100, 12, 31),
+      lastDay: DateTime.now().toUtc(),
       focusedDay: _focusedDay,
       onDaySelected: (selectedDay, focusedDay) async {
         await Navigator.of(context).push(
