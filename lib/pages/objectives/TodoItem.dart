@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mood_tracker/pages/objectives/Todo.dart';
 
 class TodoItem extends StatelessWidget {
-
-  TodoItem({
-    required this.todo,
-    required this.onTodoChanged,
-  }) : super(key: ObjectKey(todo));
+  TodoItem(
+      {required this.todo,
+      required this.onTodoChanged,
+      required this.onTodoDeleted})
+      : super(key: ObjectKey(todo));
 
   final Todo todo;
   final onTodoChanged;
+  final onTodoDeleted;
 
   TextStyle? _getTextStyle(bool checked) {
     if (!checked) return null;
@@ -26,6 +27,7 @@ class TodoItem extends StatelessWidget {
       onTap: () {
         onTodoChanged(todo);
       },
+      onLongPress: () => onTodoDeleted(todo),
       leading: CircleAvatar(
         child: Text(todo.name[0]),
       ),

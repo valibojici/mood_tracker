@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:mood_tracker/model/Record.dart';
 import 'package:mood_tracker/pages/calendar/Journal.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -12,7 +13,7 @@ class CalendarDays extends StatefulWidget {
 }
 
 class _CalendarDaysState extends State<CalendarDays> {
-  final _records = Hive.box('journal');
+  final _records = Hive.box<Record>('journal');
   DateTime _focusedDay = DateTime.now();
 
   @override
@@ -41,7 +42,7 @@ class _CalendarDaysState extends State<CalendarDays> {
           if (_records.containsKey(currentDate)) {
             return Container(
               decoration: BoxDecoration(
-                color: Journal.moodColors[_records.get(currentDate).mood],
+                color: Journal.moodColors[_records.get(currentDate)!.mood],
                 shape: BoxShape.rectangle,
               ),
               child: Center(

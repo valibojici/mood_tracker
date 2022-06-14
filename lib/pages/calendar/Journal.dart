@@ -53,7 +53,7 @@ class _JournalState extends State<Journal> {
   void initState() {
     super.initState();
     try {
-      records = Hive.box("journal");
+      records = Hive.box<Record>("journal");
     } catch (e) {
       records = null;
     }
