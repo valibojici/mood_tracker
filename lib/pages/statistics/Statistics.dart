@@ -37,10 +37,17 @@ class _StatisticsState extends State<Statistics> {
       "Very happy": 0
     };
     Box records = Hive.box<Record>("journal");
-    List<Record> L = records.values.cast<Record>().toList();
-    int mn = max(L.length - k - 1, 0);
-    for (int i = L.length - 1; i >= mn; i--) {
-      switch (L[i].mood) {
+    final endDay = DateTime.now();
+    final startDay = DateTime.now().subtract(Duration(days: k));
+
+    List<Record> L = records.values
+        .cast<Record>()
+        .where(
+            (Record r) => r.data.isBefore(endDay) && r.data.isAfter(startDay))
+        .toList();
+
+    for (Record r in L) {
+      switch (r.mood) {
         case 0:
           moodMap["Very sad"] = (moodMap["Very sad"]! + 1);
           break;
