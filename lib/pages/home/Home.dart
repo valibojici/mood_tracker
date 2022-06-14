@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:mood_tracker/pages/calendar/Journal.dart';
 import 'package:mood_tracker/pages/home/BottomHomeMenu.dart';
+import 'package:mood_tracker/pages/personalityTest/personalityTest.dart';
 
 /*
   Aici ar fi pagina de home
@@ -29,9 +31,17 @@ class Home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             textHome,
             SizedBox(height: 20),
+
+            TextButton(
+              child: const Text('Take our personality test!'),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const PersonalityTest()));                             
+        },
+            )
           ],
         ),
       ),
